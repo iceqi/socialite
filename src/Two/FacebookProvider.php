@@ -18,6 +18,7 @@ class FacebookProvider extends \Laravel\Socialite\Two\FacebookProvider
 			'gender'          => isset($user['gender']) ? $user['gender'] : null,
 			'avatar'          => $avatarUrl.'?type=normal',
 			'avatar_original' => $avatarUrl.'?width=1920',
+			'profileUrl' => isset($user['link']) ? $user['link'] : null,
 		]);
 	}
 }
