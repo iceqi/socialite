@@ -33,8 +33,8 @@ class LineProvider extends AbstractProvider implements ProviderInterface
 	{
 		return (new User())->setRaw($user)->map([
 			'id'     => $user['userId'],
-			'name'   => $user['displayName'],
-			'avatar' => $user['pictureUrl'],
+			'name'   => isset($user['displayName']) ? $user['displayName'] : null,
+			'avatar' => isset($user['pictureUrl']) ? $user['pictureUrl'] : null,
 		]);
 	}
 
