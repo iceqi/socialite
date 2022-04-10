@@ -20,17 +20,17 @@ class YahooProvider extends AbstractProvider implements ProviderInterface
 
 	protected function getAuthUrl($state)
 	{
-		return $this->buildAuthUrlFromBase('https://auth.login.yahoo.co.jp/yconnect/v1/authorization', $state);
+		return $this->buildAuthUrlFromBase('https://auth.login.yahoo.co.jp/yconnect/v2/authorization', $state);
 	}
 
 	protected function getTokenUrl()
 	{
-		return 'https://auth.login.yahoo.co.jp/yconnect/v1/token';
+		return 'https://auth.login.yahoo.co.jp/yconnect/v2/token';
 	}
 
 	protected function getUserByToken($token)
 	{
-		$response = $this->getHttpClient()->get('https://userinfo.yahooapis.jp/yconnect/v1/attribute?schema=openid', [
+		$response = $this->getHttpClient()->get('https://userinfo.yahooapis.jp/yconnect/v2/attribute?schema=openid', [
 			'headers' => [
 				'Authorization' => 'Bearer '.$token,
 			],
@@ -42,7 +42,7 @@ class YahooProvider extends AbstractProvider implements ProviderInterface
 	protected function mapUserToObject(array $user)
 	{
 		return (new User())->setRaw($user)->map([
-			'id'         => $user['user_id'],
+			'id'         => $user['sub'],
 			'name'       => $user['name'],
 			'email'      => $user['email'],
 			'birth_year' => $user['birthday'],
