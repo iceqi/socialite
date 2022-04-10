@@ -43,10 +43,10 @@ class YahooProvider extends AbstractProvider implements ProviderInterface
 	{
 		return (new User())->setRaw($user)->map([
 			'id'         => $user['sub'],
-			'name'       => $user['name'],
+			'name'       => isset($user['name']) ? $user['name'] : '',
 			'email'      => $user['email'],
-			'birth_year' => $user['birthdate'],
-			'gender'     => $user['gender'],
+			'birth_year' => isset($user['birthdate']) ? $user['birthdate'] : '',
+			'gender'     => isset($user['gender']) ?  $user['gender'] : '',
 		]);
 	}
 
