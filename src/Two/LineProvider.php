@@ -58,8 +58,11 @@ class LineProvider extends AbstractProvider implements ProviderInterface
 
         $response = $this->getAccessTokenResponse($this->getCode());
 
-        $postKey = (version_compare(ClientInterface::VERSION, '6') === 1) ? 'form_params' : 'body';
-
+        if (defined('GuzzleHttp\\ClientInterface::MAJOR_VERSION')) {
+            $postKey = (version_compare(ClientInterface::MAJOR_VERSION, '6') === 1) ? 'form_params' : 'body';
+        } else {
+            $postKey = (version_compare(ClientInterface::VERSION, '6') === 1) ? 'form_params' : 'body';
+        }
         $response2 = $this->getHttpClient()->post('https://api.line.me/oauth2/v2.1/verify', [
             'headers' => ['Accept' => 'application/json'],
             $postKey => [

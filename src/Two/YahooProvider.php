@@ -32,7 +32,7 @@ class YahooProvider extends AbstractProvider implements ProviderInterface
 	{
 		$response = $this->getHttpClient()->get('https://userinfo.yahooapis.jp/yconnect/v2/attribute?schema=openid', [
 			'headers' => [
-				'Authorization' => 'Bearer '.$token,
+				'Authorization' => 'Bearer ' . $token,
 			],
 		]);
 
@@ -57,13 +57,17 @@ class YahooProvider extends AbstractProvider implements ProviderInterface
 	 */
 	public function getAccessTokenResponse($code)
 	{
-		$postKey = (version_compare(ClientInterface::VERSION, '6') === 1) ? 'form_params' : 'body';
+		if (defined('GuzzleHttp\\ClientInterface::MAJOR_VERSION')) {
+			$postKey = (version_compare(ClientInterface::MAJOR_VERSION, '6') === 1) ? 'form_params' : 'body';
+		} else {
+			$postKey = (version_compare(ClientInterface::VERSION, '6') === 1) ? 'form_params' : 'body';
+		}
 
-		$basic_auth_key = base64_encode($this->clientId.":".$this->clientSecret);
+		$basic_auth_key = base64_encode($this->clientId . ":" . $this->clientSecret);
 
 		$response = $this->getHttpClient()->post($this->getTokenUrl(), [
 			'headers' => [
-				'Authorization' => 'Basic '.$basic_auth_key,
+				'Authorization' => 'Basic ' . $basic_auth_key,
 				'Content-Type'  => 'application/x-www-form-urlencoded',
 			],
 			$postKey  => $this->getTokenFields($code),

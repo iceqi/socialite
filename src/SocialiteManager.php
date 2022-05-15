@@ -11,21 +11,21 @@ class SocialiteManager extends \Laravel\Socialite\SocialiteManager
 {
 	protected function createFacebookDriver()
 	{
-		$config = $this->app['config']['services.facebook'];
+		$config = $this->config->get('services.facebook');
 
 		return $this->buildProvider(FacebookProvider::class, $config);
 	}
 
 	protected function createYahooDriver()
 	{
-		$config = $this->app['config']['services.yahoo'];
+		$config = $this->config->get('services.yahoo');
 
 		return $this->buildProvider(YahooProvider::class, $config);
 	}
 
 	protected function createLineDriver()
 	{
-		$config = $this->app['config']['services.line'];
+		$config = $this->config->get('services.line');
 
 		return $this->buildProvider(LineProvider::class, $config);
 	}
