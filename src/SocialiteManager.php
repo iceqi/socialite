@@ -5,6 +5,7 @@ namespace RingoProject\Socialite;
 use RingoProject\Socialite\Two\FacebookProvider;
 use RingoProject\Socialite\Two\YahooProvider;
 use RingoProject\Socialite\Two\LineProvider;
+use RingoProject\Socialite\Two\RakutenProvider;
 
 
 class SocialiteManager extends \Laravel\Socialite\SocialiteManager
@@ -28,5 +29,12 @@ class SocialiteManager extends \Laravel\Socialite\SocialiteManager
 		$config = $this->config->get('services.line');
 
 		return $this->buildProvider(LineProvider::class, $config);
+	}
+
+	protected function createRakutenDriver()
+	{
+		$config = $this->config->get('services.rakuten');
+
+		return $this->buildProvider(RakutenProvider::class, $config);
 	}
 }
