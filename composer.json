@@ -1,5 +1,5 @@
 {
-	"name": "itcom/socialite",
+	"name": "iceqi/socialite",
 	"description": "laravel/socialiteiの拡張",
 	"license": "MIT",
 	"require": {
