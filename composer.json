@@ -3,7 +3,7 @@
 	"description": "laravel/socialiteiの拡張",
 	"license": "MIT",
 	"require": {
-		"php": "^8.0.2",
+		"php": "^7.4.0",
 		"guzzlehttp/guzzle": "^7.3",
 		"laravel/socialite": "^5.5",
 		"gree/jose": "^2.2"
